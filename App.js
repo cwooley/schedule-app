@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducers from './src/reducers';
+import firebase from 'firebase';
 
-export default class App extends React.Component {
+export default class App extends Component {
+
+  //initialize firebase
+  componentWillMount(){
+    const config = {
+    apiKey: "AIzaSyD44Y9PaVEO9MNOz5C9ttMdkHqcsYleQ1U",
+    authDomain: "schedule-app-2637a.firebaseapp.com",
+    databaseURL: "https://schedule-app-2637a.firebaseio.com",
+    projectId: "schedule-app-2637a",
+    storageBucket: "schedule-app-2637a.appspot.com",
+    messagingSenderId: "771724377788"
+  };
+  firebase.initializeApp(config);
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <Provider store={createStore(reducers)}>
+        <View style={styles.container}>
+          <Text>WOOOO</Text>
+        </View>
+      </Provider>
     );
   }
 }
